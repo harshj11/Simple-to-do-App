@@ -49,6 +49,7 @@ app.get("/", (req, res) => {
 	res.render("home", {
 		salutation: salutationText,
 		emoji: emoji,
+		date: today.toLocaleString('en-US', { year: 'numeric', month: 'long', day: 'numeric' }),
 		day: day
 	});
 });
