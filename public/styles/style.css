@@ -446,12 +446,33 @@ Ensure the default browser behavior of the `hidden` attribute.
   margin-bottom: 4rem;
 }
 
+.mx-2 {
+  margin-left: 0.5rem;
+  margin-right: 0.5rem;
+}
+
 .mt-0 {
   margin-top: 0px;
 }
 
 .mb-4 {
   margin-bottom: 1rem;
+}
+
+.mt-3 {
+  margin-top: 0.75rem;
+}
+
+.mt-16 {
+  margin-top: 4rem;
+}
+
+.mb-14 {
+  margin-bottom: 3.5rem;
+}
+
+.mb-1 {
+  margin-bottom: 0.25rem;
 }
 
 .flex {
@@ -468,6 +489,10 @@ Ensure the default browser behavior of the `hidden` attribute.
 
 .w-64 {
   width: 16rem;
+}
+
+.cursor-pointer {
+  cursor: pointer;
 }
 
 .flex-col {
@@ -503,6 +528,11 @@ Ensure the default browser behavior of the `hidden` attribute.
   border-color: rgb(216 180 254 / var(--tw-border-opacity));
 }
 
+.border-purple-100 {
+  --tw-border-opacity: 1;
+  border-color: rgb(243 232 255 / var(--tw-border-opacity));
+}
+
 .bg-white {
   --tw-bg-opacity: 1;
   background-color: rgb(255 255 255 / var(--tw-bg-opacity));
@@ -517,12 +547,25 @@ Ensure the default browser behavior of the `hidden` attribute.
   --tw-gradient-stops: var(--tw-gradient-from), var(--tw-gradient-to, rgb(192 132 252 / 0));
 }
 
+.from-pink-400 {
+  --tw-gradient-from: #f472b6;
+  --tw-gradient-stops: var(--tw-gradient-from), var(--tw-gradient-to, rgb(244 114 182 / 0));
+}
+
 .to-pink-400 {
   --tw-gradient-to: #f472b6;
 }
 
+.to-purple-400 {
+  --tw-gradient-to: #c084fc;
+}
+
 .p-2 {
   padding: 0.5rem;
+}
+
+.p-3 {
+  padding: 0.75rem;
 }
 
 .py-10 {
@@ -569,6 +612,16 @@ Ensure the default browser behavior of the `hidden` attribute.
   line-height: 1.75rem;
 }
 
+.text-sm {
+  font-size: 0.875rem;
+  line-height: 1.25rem;
+}
+
+.text-xs {
+  font-size: 0.75rem;
+  line-height: 1rem;
+}
+
 .font-bold {
   font-weight: 700;
 }
@@ -576,6 +629,10 @@ Ensure the default browser behavior of the `hidden` attribute.
 .text-white {
   --tw-text-opacity: 1;
   color: rgb(255 255 255 / var(--tw-text-opacity));
+}
+
+.accent-pink-500 {
+  accent-color: #ec4899;
 }
 
 .shadow-lg {
@@ -588,6 +645,37 @@ Ensure the default browser behavior of the `hidden` attribute.
   --tw-shadow: 0 4px 6px -1px rgb(0 0 0 / 0.1), 0 2px 4px -2px rgb(0 0 0 / 0.1);
   --tw-shadow-colored: 0 4px 6px -1px var(--tw-shadow-color), 0 2px 4px -2px var(--tw-shadow-color);
   box-shadow: var(--tw-ring-offset-shadow, 0 0 #0000), var(--tw-ring-shadow, 0 0 #0000), var(--tw-shadow);
+}
+
+.shadow-sm {
+  --tw-shadow: 0 1px 2px 0 rgb(0 0 0 / 0.05);
+  --tw-shadow-colored: 0 1px 2px 0 var(--tw-shadow-color);
+  box-shadow: var(--tw-ring-offset-shadow, 0 0 #0000), var(--tw-ring-shadow, 0 0 #0000), var(--tw-shadow);
+}
+
+.transition {
+  transition-property: color, background-color, border-color, fill, stroke, opacity, box-shadow, transform, filter, -webkit-text-decoration-color, -webkit-backdrop-filter;
+  transition-property: color, background-color, border-color, text-decoration-color, fill, stroke, opacity, box-shadow, transform, filter, backdrop-filter;
+  transition-property: color, background-color, border-color, text-decoration-color, fill, stroke, opacity, box-shadow, transform, filter, backdrop-filter, -webkit-text-decoration-color, -webkit-backdrop-filter;
+  transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
+  transition-duration: 150ms;
+}
+
+.duration-200 {
+  transition-duration: 200ms;
+}
+
+.ease-in-out {
+  transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.hover\:bg-gradient-to-r:hover {
+  background-image: linear-gradient(to right, var(--tw-gradient-stops));
+}
+
+.hover\:text-white:hover {
+  --tw-text-opacity: 1;
+  color: rgb(255 255 255 / var(--tw-text-opacity));
 }
 
 @media (min-width: 640px) {
@@ -612,6 +700,11 @@ Ensure the default browser behavior of the `hidden` attribute.
   .sm\:text-4xl {
     font-size: 2.25rem;
     line-height: 2.5rem;
+  }
+
+  .sm\:text-sm {
+    font-size: 0.875rem;
+    line-height: 1.25rem;
   }
 }
 
