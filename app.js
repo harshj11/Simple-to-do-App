@@ -4,6 +4,7 @@ const bodyParser = require('body-parser');
 const app = express();
 
 const today = new Date();
+const todos = [];
 
 app.set('view engine', 'ejs');
 
@@ -47,11 +48,17 @@ app.get("/", (req, res) => {
 	}
 
 	res.render("home", {
-		salutation: salutationText,
-		emoji: emoji,
 		date: today.toLocaleString('en-US', { year: 'numeric', month: 'long', day: 'numeric' }),
-		day: day
+		day: day,
+		emoji: emoji,
+		salutation: salutationText,
+		todoItems: todos
 	});
+});
+
+app.post("/", (req, res) => {
+	todos.push(req.body.newToDo);
+	res.redirect("/");
 });
 
 app.listen(3000, () => {
