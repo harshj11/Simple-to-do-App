@@ -1,3 +1,9 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+@layer utilities {
+    input[type="checkbox"]:checked + label {
+        @apply line-through decoration-pink-500 text-pink-500
+    }
+}
