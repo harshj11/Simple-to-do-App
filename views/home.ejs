@@ -33,19 +33,22 @@
                 <span class="font-bold text-white text-lg sm:text-2xl"><%=date%></span>
             </div>
             
-            <div class="border border-purple-100 mt-3 p-3 rounded-lg shadow-sm w-64 sm:w-80 hover:bg-gradient-to-r from-pink-400 to-purple-400 hover:text-white transition ease-in-out delay-50 duration-200">
-                <input type="checkbox" class="accent-pink-500 cursor-pointer" id="checkbox-1">
-                <label for="checkbox-1" class="cursor-pointer font-bold mx-2 text-xs sm:text-sm">Drink Milk</label>
-            </div>
-            <div class="border border-purple-100 mt-3 p-3 rounded-lg shadow-sm w-64 sm:w-80 hover:bg-gradient-to-r from-pink-400 to-purple-400 hover:text-white transition ease-in-out delay-50 duration-200">
-                <input type="checkbox" class="accent-pink-500 cursor-pointer" id="checkbox-2">
-                <label for="checkbox-2" class="cursor-pointer font-bold mx-2 text-xs sm:text-sm">Drink Milk</label>
-            </div>
+            <% for(let i = 0; i < todoItems.length; i++) { %>
+            
+                <div class="border border-purple-100 mt-3 p-3 rounded-lg shadow-sm w-64 sm:w-80 hover:bg-gradient-to-r from-pink-400 to-purple-400 hover:text-white transition ease-in-out delay-50 duration-200">
+                    <input type="checkbox" class="accent-pink-500 cursor-pointer" id="checkbox-<%=i%>">
+                    <label for="checkbox-<%=i%>" class="cursor-pointer font-bold mx-2 text-xs sm:text-sm"><%=todoItems[i]%></label>
+                </div>                
+            
+            <% } %>
 
-            <div class="flex justify-between items-center mt-5 w-64 sm:w-80">
-                <input type="text" class="border-b-4 border-purple-500 font-bold h-12 w-5/6 px-2 shadow-inner text-purple-500 text-xs sm:text-sm focus:outline-none" placeholder="Type a todo...">
-                <button type="submit" class="bg-purple-400 font-bold h-10 w-10 sm:h-12 sm:w-12 rounded-full shadow-sm text-white transition ease-in-out delay-50 hover:scale-110">+</button>
-            </div>
+            <form method="POST" action="/">
+                <div class="flex justify-between items-center mt-5 w-64 sm:w-80">
+                    <input type="text" class="border-b-4 border-purple-500 font-bold h-12 w-5/6 px-2 shadow-inner text-purple-500 text-xs sm:text-sm focus:outline-none" name="newToDo" placeholder="Type a todo..." required>
+                    <button type="submit" class="bg-purple-400 font-bold h-10 w-10 sm:h-12 sm:w-12 rounded-full shadow-sm text-white transition ease-in-out delay-50 hover:scale-110">+</button>
+                </div>
+            </form>
+
         </div>
     </main>
 </body>
