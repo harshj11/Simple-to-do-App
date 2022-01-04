@@ -1,7 +1,16 @@
 const express = require('express');
 const bodyParser = require('body-parser');
+const mongoose = require('mongoose');
 
 const app = express();
+
+mongoose.connect("mongodb://localhost:27017/simpleTodoDB");
+
+const itemsSchema = new mongoose.Schema({
+	name: String
+});
+
+const Item = mongoose.model("item", itemsSchema);
 
 const today = new Date();
 const todos = [];
@@ -10,6 +19,25 @@ app.set('view engine', 'ejs');
 
 app.use(bodyParser.urlencoded({extended: true}));
 app.use(express.static(__dirname + "/public"));
+
+const item1 = new Item({
+	name: "Eat"
+});
+
+const item2 = new Item({
+	name: "Code"
+});
+
+const item3 = new Item({
+	name: "Repeat"
+});
+
+Item.insertMany([item1, item2, item3], (err) => {
+	if(err) 
+		console.log(err);
+	else
+		console.log("Successfully saved items.");
+});
 
 app.get("/", (req, res) => {
 	
