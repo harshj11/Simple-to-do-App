@@ -6,11 +6,11 @@ const app = express();
 
 mongoose.connect("mongodb://localhost:27017/simpleTodoDB");
 
-const itemsSchema = new mongoose.Schema({
+const todosSchema = new mongoose.Schema({
 	name: String
 });
 
-const Item = mongoose.model("item", itemsSchema);
+const Todo = mongoose.model("todo", todosSchema);
 
 const today = new Date();
 const todos = [];
@@ -19,25 +19,6 @@ app.set('view engine', 'ejs');
 
 app.use(bodyParser.urlencoded({extended: true}));
 app.use(express.static(__dirname + "/public"));
-
-const item1 = new Item({
-	name: "Eat"
-});
-
-const item2 = new Item({
-	name: "Code"
-});
-
-const item3 = new Item({
-	name: "Repeat"
-});
-
-Item.insertMany([item1, item2, item3], (err) => {
-	if(err) 
-		console.log(err);
-	else
-		console.log("Successfully saved items.");
-});
 
 app.get("/", (req, res) => {
 	
@@ -85,10 +66,20 @@ app.get("/", (req, res) => {
 });
 
 app.post("/", (req, res) => {
-	todos.push(req.body.newToDo);
+	let newTodo = new Todo({name: req.body.newToDo});
+	newTodo.save().then(promise => todos.push(promise));	
 	res.redirect("/");
 });
 
 app.listen(3000, () => {
+	Todo.find((err, foundTodos) => {
+		if(err) {
+			console.log(err);
+		} else {
+			foundTodos.forEach(todo => {
+				todos.push(todo);
+			});
+		}
+	}) 
 	console.log("Server started at port 3000");
 });
