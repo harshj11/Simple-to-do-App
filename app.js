@@ -1,7 +1,16 @@
 const express = require('express');
 const bodyParser = require('body-parser');
+const mongoose = require('mongoose');
 
 const app = express();
+
+mongoose.connect("mongodb://localhost:27017/simpleTodoDB");
+
+const todosSchema = new mongoose.Schema({
+	name: String
+});
+
+const Todo = mongoose.model("todo", todosSchema);
 
 const today = new Date();
 const todos = [];
@@ -57,10 +66,20 @@ app.get("/", (req, res) => {
 });
 
 app.post("/", (req, res) => {
-	todos.push(req.body.newToDo);
+	let newTodo = new Todo({name: req.body.newToDo});
+	newTodo.save().then(promise => todos.push(promise));	
 	res.redirect("/");
 });
 
 app.listen(3000, () => {
+	Todo.find((err, foundTodos) => {
+		if(err) {
+			console.log(err);
+		} else {
+			foundTodos.forEach(todo => {
+				todos.push(todo);
+			});
+		}
+	}) 
 	console.log("Server started at port 3000");
 });
