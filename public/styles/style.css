@@ -483,6 +483,10 @@ Ensure the default browser behavior of the `hidden` attribute.
   display: none;
 }
 
+.h-4 {
+  height: 1rem;
+}
+
 .h-12 {
   height: 3rem;
 }
