@@ -17,7 +17,7 @@ const todosSchema = new mongoose.Schema({
 const Todo = mongoose.model("todo", todosSchema);
 
 const today = new Date();
-const todos = [];
+let todos = [];
 
 app.set('view engine', 'ejs');
 
@@ -82,10 +82,28 @@ app.post("/mark-unmark", (req, res) => {
 	Todo.updateOne(
 		{name: todos[index].name}, 
 		{isChecked: !todos[index].isChecked}
-	).then(promise => {});
+	, (err) => {
+		if(err) {
+			console.log(err);
+		}
+	});
 	
 	todos[index].isChecked = !todos[index].isChecked;
 
+	res.redirect("/");
+});
+
+app.post("/delete-to-do", (req, res) => {
+	let todoIdToDelete = req.body.deleteTodo;
+	
+	Todo.deleteOne({_id: todoIdToDelete}, (err) => {
+		if(err) {
+			console.log(err);
+		}
+	});
+
+	todos = todos.filter(todo => todo._id != todoIdToDelete);
+	
 	res.redirect("/");
 });
 
