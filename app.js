@@ -7,7 +7,11 @@ const app = express();
 mongoose.connect("mongodb://localhost:27017/simpleTodoDB");
 
 const todosSchema = new mongoose.Schema({
-	name: String
+	name: String,
+	isChecked: {
+		type: Boolean,
+		default: false
+	}
 });
 
 const Todo = mongoose.model("todo", todosSchema);
@@ -68,6 +72,20 @@ app.get("/", (req, res) => {
 app.post("/", (req, res) => {
 	let newTodo = new Todo({name: req.body.newToDo});
 	newTodo.save().then(promise => todos.push(promise));	
+	res.redirect("/");
+});
+
+app.post("/mark-unmark", (req, res) => {
+	let index = req.body.checkbox;
+	// console.log(req.body);
+	
+	Todo.updateOne(
+		{name: todos[index].name}, 
+		{isChecked: !todos[index].isChecked}
+	).then(promise => {});
+	
+	todos[index].isChecked = !todos[index].isChecked;
+
 	res.redirect("/");
 });
 
