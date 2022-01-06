@@ -8,6 +8,7 @@ mongoose.connect("mongodb://localhost:27017/simpleTodoDB");
 
 const todosSchema = new mongoose.Schema({
 	name: String,
+	date: Date,
 	isChecked: {
 		type: Boolean,
 		default: false
@@ -16,7 +17,8 @@ const todosSchema = new mongoose.Schema({
 
 const Todo = mongoose.model("todo", todosSchema);
 
-const today = new Date();
+let currentDay = new Date();
+let dateOnly = currentDay.toISOString().slice(0, 10);
 let todos = [];
 
 app.set('view engine', 'ejs');
@@ -27,10 +29,10 @@ app.use(express.static(__dirname + "/public"));
 app.get("/", (req, res) => {
 	
 	let salutationText = null, emoji = null;
-	let hours = today.getHours();
+	let hours = new Date().getHours();
 	let day = null;
 
-	switch (today.getDay()) {
+	switch (currentDay.getDay()) {
 		case 0: day = "Sunday";
 			break;
 		case 1: day = "Monday";
@@ -61,8 +63,8 @@ app.get("/", (req, res) => {
 	}
 
 	res.render("home", {
-		date: today.toLocaleString('en-US', { year: 'numeric', month: 'long', day: 'numeric' }),
-		datePickerDate: today.toISOString().slice(0, 10),
+		date: currentDay.toLocaleString('en-US', { year: 'numeric', month: 'long', day: 'numeric' }),
+		datePickerDefault: dateOnly,
 		day: day,
 		emoji: emoji,
 		salutation: salutationText,
@@ -71,7 +73,7 @@ app.get("/", (req, res) => {
 });
 
 app.post("/", (req, res) => {
-	let newTodo = new Todo({name: req.body.newToDo});
+	let newTodo = new Todo({name: req.body.newToDo, date: dateOnly});
 	newTodo.save().then(promise => todos.push(promise));	
 	res.redirect("/");
 });
@@ -108,8 +110,22 @@ app.post("/delete-to-do", (req, res) => {
 	res.redirect("/");
 });
 
+app.post("/change-date", (req, res) => {
+	dateOnly = req.body.dateToQuery;
+	currentDay = new Date(dateOnly);
+	//console.log(currentDay.toLocaleString('en-US', { year: 'numeric', month: 'long', day: 'numeric' }));
+	Todo.find({date: req.body.dateToQuery}, (err, foundTodos) => {
+		if(err) {
+			console.log(err);
+		} else {
+			todos = foundTodos;
+		}
+	});
+	res.redirect("/");
+});
+
 app.listen(3000, () => {
-	Todo.find((err, foundTodos) => {
+	Todo.find({date: dateOnly}, (err, foundTodos) => {
 		if(err) {
 			console.log(err);
 		} else {

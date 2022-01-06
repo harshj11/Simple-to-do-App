@@ -35,7 +35,10 @@
     <main>
         <div class="bg-white flex flex-col items-center mx-auto my-16 py-10 rounded-lg shadow-lg w-80 sm:w-96">
             <div class="bg-gradient-to-r from-purple-400 to-pink-400 border border-purple-300 flex justify-center mt-0 mb-1 p-2 rounded-lg shadow-md w-64 sm:w-80">
-                <span class="font-bold text-white text-lg sm:text-2xl"><input type="date" value="<%=datePickerDate%>" class="bg-gradient-to-r from-purple-400 to-pink-400 outline-none"></span>
+                <span class="">
+                <form method="POST" action="/change-date">
+                    <input name="dateToQuery" type="date" value="<%=datePickerDefault%>" class="bg-gradient-to-r from-purple-400 to-pink-400 outline-none font-bold text-white text-sm sm:text-2xl" onchange="this.form.submit()">
+                </form>
             </div>
             
             <% for(let i = 0; i < todoItems.length; i++) { %>
