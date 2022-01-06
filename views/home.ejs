@@ -11,26 +11,34 @@
 </head>
 <body class="bg-gradient-to-r from-purple-400 to-pink-400 font-poppins">
     <header>
-        <div class="flex items-center justify-between m-8 text-3xl">
-            <div class="flex items-center">
-                <h1 class="font-bold text-white text-2xl sm:text-4xl md:text-5xl">
-                    <%=salutation%>
-                </h1>
-                <span class="text-2xl sm:text-3xl md:text-5xl">
-                    <%=emoji%>
-                </span>
+        <div class="flex items-center justify-between m-8">
+            <div class="flex flex-col">
+                <div class="flex">
+                    <h1 class="font-bold text-white text-xl sm:text-4xl md:text-5xl">
+                        <%=salutation%>
+                    </h1>
+                    <span class="text-2xl sm:text-3xl md:text-5xl">
+                        <%=emoji%>
+                    </span>
+                </div>
+                <h2 class="font-bold text-white text-lg sm:text-2xl">
+                    <%=longDate%>
+                </h2>
             </div>
-            <div>
-                <h2 class="font-bold text-white text-lg sm:text-2xl md:text-3xl">
-                    <%=day%>
+            <div class="flex flex-col font-bold text-white text-lg sm:text-2xl">
+                <h2>
+                    <%=weekday%>
                 </h2>
             </div>
         </div>
-    </header>
+    </header>    
     <main>
         <div class="bg-white flex flex-col items-center mx-auto my-16 py-10 rounded-lg shadow-lg w-80 sm:w-96">
             <div class="bg-gradient-to-r from-purple-400 to-pink-400 border border-purple-300 flex justify-center mt-0 mb-1 p-2 rounded-lg shadow-md w-64 sm:w-80">
-                <span class="font-bold text-white text-lg sm:text-2xl"><%=date%></span>
+                <span class="">
+                <form method="POST" action="/change-date">
+                    <input name="dateToQuery" type="date" value="<%=datePickerDate%>" class="bg-gradient-to-r from-purple-400 to-pink-400 outline-none font-bold text-white text-sm sm:text-2xl" onchange="this.form.submit()">
+                </form>
             </div>
             
             <% for(let i = 0; i < todoItems.length; i++) { %>
@@ -47,7 +55,7 @@
                         </form>
                     </div>
                     <div class="h-4">
-                        <form method="POST" action="/delete-to-do">
+                        <form method="POST" action="/delete-todo">
                             <button type="submit">
                                 <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-trash" viewBox="0 0 16 16">
                                     <path d="M5.5 5.5A.5.5 0 0 1 6 6v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5zm2.5 0a.5.5 0 0 1 .5.5v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5zm3 .5a.5.5 0 0 0-1 0v6a.5.5 0 0 0 1 0V6z"/>
@@ -69,5 +77,10 @@
 
         </div>
     </main>
+    <footer>
+        <div class="bg-white fixed bottom-0 p-2 text-center w-full">
+            <span>Made with ❤️ by <a href="https://twitter.com/harshj_11" class="link" target="_blank">Harsh</a></span>
+        </div>
+    </footer>
 </body>
 </html>
