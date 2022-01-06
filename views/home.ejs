@@ -11,17 +11,22 @@
 </head>
 <body class="bg-gradient-to-r from-purple-400 to-pink-400 font-poppins">
     <header>
-        <div class="flex items-center justify-between m-8 text-3xl">
-            <div class="flex items-center">
-                <h1 class="font-bold text-white text-2xl sm:text-4xl md:text-5xl">
-                    <%=salutation%>
-                </h1>
-                <span class="text-2xl sm:text-3xl md:text-5xl">
-                    <%=emoji%>
-                </span>
+        <div class="flex items-center justify-between m-8">
+            <div class="flex flex-col">
+                <div class="flex">
+                    <h1 class="font-bold text-white text-xl sm:text-4xl md:text-5xl">
+                        <%=salutation%>
+                    </h1>
+                    <span class="text-2xl sm:text-3xl md:text-5xl">
+                        <%=emoji%>
+                    </span>
+                </div>
+                <h2 class="font-bold text-white text-lg sm:text-2xl">
+                    <%=date%>
+                </h2>
             </div>
-            <div>
-                <h2 class="font-bold text-white text-lg sm:text-2xl md:text-3xl">
+            <div class="flex flex-col font-bold text-white text-lg sm:text-2xl">
+                <h2>
                     <%=day%>
                 </h2>
             </div>
@@ -30,7 +35,7 @@
     <main>
         <div class="bg-white flex flex-col items-center mx-auto my-16 py-10 rounded-lg shadow-lg w-80 sm:w-96">
             <div class="bg-gradient-to-r from-purple-400 to-pink-400 border border-purple-300 flex justify-center mt-0 mb-1 p-2 rounded-lg shadow-md w-64 sm:w-80">
-                <span class="font-bold text-white text-lg sm:text-2xl"><%=date%></span>
+                <span class="font-bold text-white text-lg sm:text-2xl"><input type="date" value="<%=datePickerDate%>" class="bg-gradient-to-r from-purple-400 to-pink-400 outline-none"></span>
             </div>
             
             <% for(let i = 0; i < todoItems.length; i++) { %>
@@ -69,5 +74,11 @@
 
         </div>
     </main>
+
+    <footer>
+        <div class="bg-white fixed bottom-0 p-2 text-center w-full">
+            <span>Made with ❤️ by <a href="https://twitter.com/harshj_11" class="link" target="_blank">Harsh</a></span>
+        </div>
+    </footer>
 </body>
 </html>

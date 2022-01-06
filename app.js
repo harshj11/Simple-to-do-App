@@ -62,6 +62,7 @@ app.get("/", (req, res) => {
 
 	res.render("home", {
 		date: today.toLocaleString('en-US', { year: 'numeric', month: 'long', day: 'numeric' }),
+		datePickerDate: today.toISOString().slice(0, 10),
 		day: day,
 		emoji: emoji,
 		salutation: salutationText,
@@ -112,9 +113,7 @@ app.listen(3000, () => {
 		if(err) {
 			console.log(err);
 		} else {
-			foundTodos.forEach(todo => {
-				todos.push(todo);
-			});
+			todos = foundTodos;
 		}
 	}) 
 	console.log("Server started at port 3000");
