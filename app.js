@@ -28,7 +28,7 @@ let dateOnly = selectedDate.toISOString().slice(0, 10);
 let todos = [];
 
 app.get("/", (req, res) => {
-	const weekday = day.getDay();
+	const weekday = day.getDay(selectedDate.getDay());
 	const salutationText = day.getSalutation();
 
 	res.render("home", {
@@ -43,8 +43,10 @@ app.get("/", (req, res) => {
 
 app.post("/", (req, res) => {
 	let newTodoItem = new Todo({name: req.body.newToDo, date: dateOnly});
-	newTodoItem.save().then(promise => todos.push(promise));	
-	res.redirect("/");
+	newTodoItem.save().then(promise => {
+		todos.push(promise);
+		res.redirect("/");
+	});	
 });
 
 app.post("/mark-unmark", (req, res) => {
@@ -66,11 +68,11 @@ app.post("/delete-todo", (req, res) => {
 	Todo.deleteOne({_id: todoIdToDelete}, (err) => {
 		if(err) {
 			console.log(err);
+		} else {
+			todos = todos.filter(todo => todo._id != todoIdToDelete);
+			res.redirect("/");
 		}
 	});
-
-	todos = todos.filter(todo => todo._id != todoIdToDelete);
-	res.redirect("/");
 });
 
 app.post("/change-date", (req, res) => {
@@ -82,9 +84,9 @@ app.post("/change-date", (req, res) => {
 			console.log(err);
 		} else {
 			todos = foundTodos;
+			res.redirect("/");
 		}
 	});
-	res.redirect("/");
 });
 
 app.listen(3000, () => {
