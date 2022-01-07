@@ -91,7 +91,7 @@ app.post("/change-date", (req, res) => {
 	});
 });
 
-app.listen(3000, () => {
+app.listen(process.env.PORT || 3000, () => {
 	Todo.find({date: dateOnly}, (err, foundTodos) => {
 		if(err) {
 			console.log(err);
